@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Defines list of existing classes
 """
+
 from ..base_model import BaseModel
 from ..user import User
 from ..state import State
