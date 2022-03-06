@@ -3,7 +3,7 @@
 of the command interpreter
 """
 import cmd
-from models.engine import storage
+from models import storage
 from models.engine.utils import list_class
 # from models.utils.utils import Utils
 
