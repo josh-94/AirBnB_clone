@@ -5,15 +5,12 @@ of the command interpreter
 import cmd
 from models import storage
 from models.engine.utils import list_class
-# from models.utils.utils import Utils
 
 
 class HBNBCommand(cmd.Cmd):
     """Uses cmd methods to control command interpreter
     """
-    # custom prompt:
-    # intro = "Welcome to AirBnB command prompt"
-    prompt = '(hbnb) '
+    prompt = "(hbnb)"
 
     def do_quit(self, arg):
         """Quit command exit the program
@@ -21,30 +18,33 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOF(self, arg):
-        """Exits console"""
+        """ EOF command to exit the program
+        """
         return True
 
     def emptyline(self):
         """Overwriting the emptyline method
         """
-        pass
+        return False
 
     def do_create(self, arg_instance):
-        """Creates a new instance of BaseModel,
-        saves it (to the JSON file) and prints the id
+        """Creates a new instance of a class
+        saves it (to the JSON file)
+        and prints the id.
+            Ex: $ create BaseModel
         """
         args = arg_instance.split()
         if self.not_class(arg_instance):
             return
         else:
             my_json = list_class[args[0]]()
-            # my_json = list_class[arg_instance]()
             storage.save()
             print(my_json.id)
 
     def do_show(self, args_string):
         """Prints the string representation of an instance
-        based on the class name and id
+        based on the class name and id.
+        Ex: $ show BaseModel 1234-1234-1234.
         """
         nm_arg = args_string.split()
         if self.not_class(args_string):
@@ -60,8 +60,9 @@ class HBNBCommand(cmd.Cmd):
                     print(value)
 
     def do_destroy(self, line):
-        """Deletes an instance based on the class name
-        and id and saves the change into the JSON file
+        """ Deletes an instance based on the class name and id
+        (save the change into the JSON file).
+        Ex: $ destroy BaseModel 1234-1234-1234.
         """
         nm_arg = line.split()
         if self.not_class(line):
@@ -114,11 +115,10 @@ class HBNBCommand(cmd.Cmd):
         elif len(nm_arg) == 3:
             print("** value missing **")
         else:
-            value = nm_arg[3]
+            value = nm_arg[3].replace('"', '')
             key = '{}.{}'.format(nm_arg[0], nm_arg[1])
             __objects = storage.all()
-            """La setattr()función establece el valor del
-            atributo de un objeto.
+            """La setattr()función establece el valor del atributo de un objeto
             Note:
                 toma tres parámetros:
                 setattr(objeto, nombre, value)
