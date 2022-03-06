@@ -1,19 +1,20 @@
 #!/usr/bin/python3
-"""This module contains the entry point 
+"""This module contains the entry point
 of the command interpreter
 """
 import cmd
 from models import storage
 from models.engine.utils import list_class
-#from models.utils.utils import Utils
+# from models.utils.utils import Utils
+
 
 class HBNBCommand(cmd.Cmd):
     """Uses cmd methods to control command interpreter
-	"""
-    #custom prompt:
-    #intro = "Welcome to AirBnB command prompt"
+    """
+    # custom prompt:
+    # intro = "Welcome to AirBnB command prompt"
     prompt = "(hbnb) "
-    
+
     def do_quit(self, arg):
         """Quit command exit the program
         """
@@ -37,7 +38,7 @@ class HBNBCommand(cmd.Cmd):
             return
         else:
             my_json = list_class[args[0]]()
-            #my_json = list_class[arg_instance]()
+            # my_json = list_class[arg_instance]()
             storage.save()
             print(my_json.id)
 
@@ -57,8 +58,8 @@ class HBNBCommand(cmd.Cmd):
                 c_ide = value.id
                 if c_name == nm_arg[0] and c_ide == nm_arg[1]:
                     print(value)
-            
-    def do_destroy (self, line):
+
+    def do_destroy(self, line):
         """Deletes an instance based on the class name
         and id and saves the change into the JSON file
         """
@@ -72,7 +73,6 @@ class HBNBCommand(cmd.Cmd):
             __objects = storage.all()
             del __objects[key]
             storage.save()
-            
 
     def do_all(self, line):
         """Prints all string representation of all instances
@@ -82,7 +82,7 @@ class HBNBCommand(cmd.Cmd):
         nm_arg = line.split()
         my_list = []
         all_ob = storage.all()
-        if nm_arg[0] not in  list_class:
+        if nm_arg[0] not in list_class:
             print("** class doesn't exist **")
         if nm_arg[0] is None:
             for key in all_ob.keys():
@@ -117,7 +117,8 @@ class HBNBCommand(cmd.Cmd):
             value = nm_arg[3]
             key = '{}.{}'.format(nm_arg[0], nm_arg[1])
             __objects = storage.all()
-            """La setattr()función establece el valor del atributo de un objeto.
+            """La setattr()función establece el valor del
+            atributo de un objeto.
             Note:
                 toma tres parámetros:
                 setattr(objeto, nombre, value)
@@ -127,7 +128,6 @@ class HBNBCommand(cmd.Cmd):
             """
             setattr(__objects[key], nm_arg[2], value)
             storage.save()
-        
 
     @staticmethod
     def not_class(clss_name):
@@ -156,6 +156,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
             return True
         return False
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
