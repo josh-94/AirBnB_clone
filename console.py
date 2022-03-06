@@ -13,7 +13,7 @@ class HBNBCommand(cmd.Cmd):
     """
     # custom prompt:
     # intro = "Welcome to AirBnB command prompt"
-    prompt = "(hbnb) "
+    prompt = '(hbnb) '
 
     def do_quit(self, arg):
         """Quit command exit the program
