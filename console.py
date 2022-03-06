@@ -27,7 +27,7 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Overwriting the emptyline method
         """
-        return False
+        pass
 
     def do_create(self, arg_instance):
         """Creates a new instance of BaseModel,
