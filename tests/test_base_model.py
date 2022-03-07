@@ -66,8 +66,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(repr_dict["__class__"], str)
 
         # comprobar si los valores del diccionario son correctos
-        self.assertEqual(repr_dict["id"], obj.id)
-        self.assertEqual(repr_dict["__class__"], type(obj).__name__)
+        self.assertEqual(repr_dict["id"], instance_bm.id)
+        self.assertEqual(repr_dict["__class__"], type(instance_bm).__name__)
         string = str(datetime.isoformat(instance_bm.created_at))
         self.assertEqual(repr_dict["created_at"], string)
         string = str(datetime.isoformat(instance_bm.updated_at))
