@@ -14,24 +14,39 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, arg):
         """Quit command exit the program
+        Usage:
+            quit
         """
         return True
 
     def do_EOF(self, arg):
         """ EOF command to exit the program
+        Usage:
+            EOF
         """
         return True
 
+    def do_help(self, arg):
+        """Provides description of a given command
+        Usage:
+            help // list available commands
+            help <command>
+        """
+        cmd.Cmd.do_help(self, arg)
+
     def emptyline(self):
         """Overwriting the emptyline method
+        Usage:
+            (hbnb)
+            (hbnb)
         """
         return False
 
     def do_create(self, arg_instance):
         """Creates a new instance of a class
-        saves it (to the JSON file)
-        and prints the id.
-            Ex: $ create BaseModel
+        saves it (to the JSON file) and prints the id.
+        Usage:
+            $ create <class name>
         """
         args = arg_instance.split()
         if self.not_class(arg_instance):
@@ -44,7 +59,8 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, args_string):
         """Prints the string representation of an instance
         based on the class name and id.
-        Ex: $ show BaseModel 1234-1234-1234.
+        Usage:
+            $ show <class name> <id>
         """
         nm_arg = args_string.split()
         if self.not_class(args_string):
@@ -62,7 +78,8 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, line):
         """ Deletes an instance based on the class name and id
         (save the change into the JSON file).
-        Ex: $ destroy BaseModel 1234-1234-1234.
+        Usage: 
+            $ destroy <class name> <id>
         """
         nm_arg = line.split()
         if self.not_class(line):
@@ -78,7 +95,8 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, line):
         """Prints all string representation of all instances
         based on the class name or not.
-            Ex: $ all BaseModel or $ all.
+        Usage: 
+            $ all <base model> or $ all.
         """
         nm_arg = line.split()
         my_list = []
@@ -101,7 +119,8 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, line):
         """Updates an instance based on the class name and id
         by adding or updating attribute (save the change into the JSON file)
-            Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com"
+        Usage: 
+            $ update <class name> <id> email "aibnb@mail.com"
         """
         nm_arg = line.split()
         if self.not_class(line):
