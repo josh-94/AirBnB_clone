@@ -83,14 +83,12 @@ class HBNBCommand(cmd.Cmd):
         nm_arg = line.split()
         my_list = []
         all_ob = storage.all()
-        if nm_arg[0] not in list_class:
+        if len(nm_arg) == 0:
+            for valores in all_ob.values():
+                my_list.append(str(valores))
+            print(my_list)
+        elif nm_arg[0] not in list_class.keys():
             print("** class doesn't exist **")
-        if nm_arg[0] is None:
-            for key in all_ob.keys():
-                value = all_ob.get(key)
-                print_obj = '{}'.format(all_ob[key].__str__())
-                print(print_obj)
-                my_list.append(value)
         else:
             my_list = []
             all_ob = storage.all()
