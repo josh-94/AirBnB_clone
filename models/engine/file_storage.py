@@ -4,6 +4,7 @@ Defines the FileStorage class
 """
 import json
 from models.base_model import BaseModel
+from models.engine.utils import list_class
 
 
 class FileStorage:
@@ -48,11 +49,11 @@ class FileStorage:
         try:
             with open(self.__file_path, 'r') as j_file:
                 # deserializacion del archivo
-                dic_obj = json.loads(j_file.read())
+                dic_obj = json.load(j_file)
             # recorre el contenido del archivo deserializado
             for key, value in dic_obj.items():
                 # obtener el diccionario
-                dic_obj[key] = BaseModel(value)
-            self.__objects = dic_obj
+                cl_name = value["__class__"]
+                self.new(list_class[cl_name](**value))
         except Exception:
             pass
